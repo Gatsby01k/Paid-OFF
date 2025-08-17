@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "recharts";
 
-/* Симуляция */
+/* ==== simple simulation for chart ==== */
 type RiskMode = "low" | "medium" | "high";
 type Term = 1 | 7 | 30 | 90;
 
@@ -63,7 +63,7 @@ export default function Page() {
   return (
     <main ref={rootRef} className="min-h-screen flex flex-col">
       {/* NAV */}
-      <header className="container-aw flex items-center justify-between py-6">
+      <header className="header container-aw py-6 flex items-center justify-between">
         <div className="text-base md:text-lg font-extrabold tracking-widest">PAIDOFF</div>
         <nav className="hidden md:flex items-center gap-8">
           <a className="nav-link" href="#about">About</a>
@@ -73,15 +73,15 @@ export default function Page() {
         </nav>
       </header>
 
-      {/* HERO (ровная сетка 6/6, ограничение ширины заголовка) */}
+      {/* HERO (ровная сетка 6/6, фикс ширины заголовка/робота) */}
       <section
         className="
           container-aw grid grid-cols-1 md:grid-cols-12
           gap-10 md:gap-12 items-center
-          mt-10 md:mt-14 pb-14 md:pb-18 min-h-[72vh]
+          mt-10 md:mt-14 pb-14 md:pb-16 min-h-[72vh]
         "
       >
-        {/* Левый столбец */}
+        {/* Left */}
         <div className="md:col-span-6 reveal">
           <div className="kicker uppercase text-xs md:text-sm mb-2">
             AUTOMATED TRADING WITH ARTIFICIAL INTELLIGENCE
@@ -100,7 +100,7 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Правый столбец — робот WALL-E-стайл */}
+        {/* Right — WALL-E style robot */}
         <div className="md:col-span-6 flex justify-center md:justify-end reveal">
           <div className="robot-wrap robot">
             <svg
@@ -118,12 +118,12 @@ export default function Page() {
                 <path d="M-6 5 L0 -8 L6 5 Z" fill="#000"/>
               </g>
 
-              {/* Chassis (грудь+корпус) */}
+              {/* Chassis */}
               <g className="robot__body" transform="translate(100,120)">
-                {/* торс */}
                 <rect x="0" y="40" width="240" height="140" rx="22" fill="#0f0f10" stroke="#000" strokeWidth="8"/>
                 <rect x="10" y="50" width="220" height="120" rx="18" fill="#1a1a1d"/>
-                {/* «панель» графика */}
+
+                {/* panel */}
                 <g transform="translate(42,82)">
                   <rect x="0" y="0" width="156" height="58" rx="10" fill="#000"/>
                   <rect x="12" y="30" width="14" height="22" fill="#ffd300"/>
@@ -133,11 +133,11 @@ export default function Page() {
                   <rect x="100" y="6" width="14" height="46" fill="#ffd300"/>
                 </g>
 
-                {/* голова (бинокль) */}
+                {/* head */}
                 <g transform="translate(28,-26)">
                   <rect x="0" y="0" width="184" height="96" rx="28" fill="#0f0f10" stroke="#000" strokeWidth="8"/>
                   <rect x="8" y="8" width="168" height="80" rx="24" fill="#1a1a1d"/>
-                  {/* окуляры */}
+                  {/* eyes */}
                   <g transform="translate(54,48)">
                     <circle cx="0" cy="0" r="18" fill="#000"/>
                     <circle cx="0" cy="0" r="10" fill="#ffd300"/>
@@ -150,11 +150,10 @@ export default function Page() {
                     <circle cx="0" cy="0" r="6" fill="#000"/>
                     <ellipse className="robot__eyelid-right" cx="0" cy="0" rx="18" ry="18" fill="#000" opacity=".12"/>
                   </g>
-                  {/* «блик» на корпусе головы */}
                   <rect x="60" y="14" width="64" height="8" rx="4" fill="#9c9c9c" opacity=".35"/>
                 </g>
 
-                {/* руки-манипуляторы */}
+                {/* arms */}
                 <g transform="translate(-24,96)">
                   <rect x="0" y="0" width="52" height="22" rx="11" fill="#000"/>
                   <rect x="44" y="-10" width="26" height="42" rx="13" fill="#1a1a1d"/>
@@ -164,7 +163,7 @@ export default function Page() {
                   <rect x="-18" y="-10" width="26" height="42" rx="13" fill="#1a1a1d"/>
                 </g>
 
-                {/* гусеницы */}
+                {/* tracks */}
                 <g transform="translate(-8,188)">
                   <rect x="0" y="0" width="120" height="36" rx="18" fill="#000"/>
                   <rect x="132" y="0" width="120" height="36" rx="18" fill="#000"/>
@@ -175,7 +174,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Лента */}
+      {/* Band */}
       <section className="mt-4 bg-[#0b0b0e] text-[#ffd300] border-t-2 border-b-2 border-black">
         <div className="container-aw py-4 band">
           <span className="band-item">Security</span>
@@ -186,17 +185,17 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Симуляция + контролы */}
+      {/* Simulation + controls */}
       <section id="sim" className="container-aw my-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Controls */}
         <div className="lg:col-span-4 space-y-5">
           <div className="card reveal">
             <h3 className="card-title mb-3">Risk mode</h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-8">
               {(["low","medium","high"] as RiskMode[]).map((r)=>(
                 <button key={r}
                   onClick={()=>setRisk(r)}
-                  className={`px-4 py-2 rounded-full font-semibold ${risk===r ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
+                  className={`px-5 py-2 rounded-full font-semibold ${risk===r ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
                 >
                   {r[0].toUpperCase()+r.slice(1)}
                 </button>
@@ -206,11 +205,11 @@ export default function Page() {
 
           <div className="card reveal">
             <h3 className="card-title mb-3">Term</h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-8">
               {[1,7,30,90].map((t)=>(
                 <button key={t}
                   onClick={()=>setTerm(t as Term)}
-                  className={`px-4 py-2 rounded-full font-semibold ${term===t ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
+                  className={`px-5 py-2 rounded-full font-semibold ${term===t ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
                 >
                   {t}D
                 </button>
@@ -259,7 +258,7 @@ export default function Page() {
       </section>
 
       {/* FOOTER */}
-      <footer id="contact" className="container-aw py-10 border-top border-black/20 text-sm text-black/70">
+      <footer id="contact" className="container-aw py-10 border-t border-black/20 text-sm text-black/70">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="font-extrabold tracking-widest">PAIDOFF</div>
           <div>© {new Date().getFullYear()} PaidOFF. All rights reserved.</div>
