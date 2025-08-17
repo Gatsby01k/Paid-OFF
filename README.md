@@ -26,3 +26,4 @@ npm run dev
 - recharts
 - three, @react-three/fiber, @react-three/drei
 "# Paid-OFF" 
+"# PIdors" 
