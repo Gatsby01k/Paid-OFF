@@ -1,15 +1,27 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Montserrat } from 'next/font/google';
+
+const mont = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400','700','800','900'],
+  style: ['normal','italic'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'PaidOFF — AI Trading',
-  description: 'Торгуй с роботом и включай 3D, когда захочешь.',
+  title: 'PaidOFF — Automated Trading (AI)',
+  description: 'Automated crypto trading with clean UI and ROI simulation.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="ru">
-      <body className="min-h-dvh selection:bg-amber-400/40 selection:text-black">
+      <body className={mont.className}>
         {children}
       </body>
     </html>
