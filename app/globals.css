@@ -2,119 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Тема ────────────────────────────────────────────── */
+/* ── ТЕМА ─────────────────────────────────────────────── */
 :root{
-  --bg: #08090b;
-  --fg: #e7e9ee;
-  --muted: #9aa3af;
-  --card: #0d1014;
-  --brand: #f59e0b; /* янтарный акцент */
+  --yellow: #ffd400;
+  --black: #000000;
+  --muted: #111111;
 }
 
 html, body { height: 100%; }
 body {
+  background-color: var(--yellow);
+  color: var(--black);
   @apply antialiased;
-  background-color: var(--bg);
-  color: var(--fg);
-  font-feature-settings: "ss01","ss02","cv01";
 }
 
-/* ─── Компоненты (без arbitrary в @apply) ─────────────── */
-@layer components {
-  .container-aw { @apply mx-auto max-w-7xl px-6 md:px-10; }
-
-  .h1-aw { @apply text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]; }
-
-  .p-aw  { color: var(--muted); @apply text-base md:text-lg; }
-
-  .card-aw {
-    @apply rounded-2xl ring-1 ring-white/10 backdrop-blur p-6;
-    background-color: rgba(13,16,20,0.8); /* вместо bg-[var(--card)]/80 */
-  }
-
-  .btn-aw {
-    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium
-           ring-1 ring-white/15 hover:ring-white/25 transition;
-  }
-  .btn-primary {
-    @apply hover:brightness-95;
-    background-color: var(--brand); /* вместо bg-[var(--brand)] */
-    color: #000;
-  }
-  .btn-ghost {
-    @apply text-sm;
-    background-color: rgba(255,255,255,0.05); /* вместо bg-white/5 + arbitrary */
-    color: var(--fg);
-  }
-}
-
-/* ─── Доп. UI для уровня "аккуратно и дорого" ───────────────── */
+/* ── БАЗА ─────────────────────────────────────────────── */
+.container-aw { @apply mx-auto max-w-7xl px-6 md:px-10; }
 
 .logo-aw {
   letter-spacing: .22em;
   text-transform: uppercase;
-  font-size: .8rem;
-  color: var(--muted);
+  @apply text-xs md:text-sm;
+  color: var(--black);
 }
 
-.grad-text {
-  background: linear-gradient(180deg, #ffffff 0%, #c7d2fe 55%, #93c5fd 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.tagline {
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  @apply text-xs md:text-sm;
+  color: var(--black);
+  opacity: .85;
 }
 
-.card-title { font-weight: 600; }
+.h1-aw {
+  @apply font-extrabold;
+  font-style: italic;
+  line-height: 1.02;
+  font-size: clamp(40px, 6vw, 72px);
+}
 
-.hero-card {
-  position: relative;
-  border-radius: 1.2rem;
-  padding: 28px;
-  background: radial-gradient(120% 120% at 20% 0%, rgba(245,158,11,.22) 0%, rgba(13,16,20,.85) 40%, rgba(13,16,20,.92) 100%);
-  box-shadow: 0 10px 40px rgba(0,0,0,.45);
-  border: 1px solid rgba(255,255,255,.08);
-  min-height: 240px;
+.p-aw { @apply text-base md:text-lg; color: var(--muted); }
+
+/* ── КНОПКИ ───────────────────────────────────────────── */
+.btn-aw { @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition; }
+.btn-primary { @apply bg-black text-white; }
+.btn-primary { color: var(--yellow); } /* желтый текст на чёрной кнопке */
+.btn-primary:hover { filter: brightness(0.95); }
+.btn-ghost  { @apply border border-black; }
+.btn-ghost:hover { background: rgba(0,0,0,0.06); }
+
+/* ── КАРТОЧКИ/ХЕРО ───────────────────────────────────── */
+.card-black {
+  background: #0a0a0a;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  color: var(--yellow);
+  box-shadow: 0 10px 40px rgba(0,0,0,.25);
 }
-.hero-badge {
-  position: absolute; top: 12px; right: 12px;
-  font-size: .72rem; letter-spacing: .06em;
-  padding: 6px 10px; border-radius: 999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.08);
-  color: var(--fg);
+.card-title { @apply text-base font-semibold; color: var(--yellow); }
+.muted { color: #c3a900; }
+
+.chart-card {
+  background: #0a0a0a;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  color: var(--yellow);
 }
-.hero-stats {
-  display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px;
-  margin-top: 28px;
-}
-.hero-kpi { display:block; font-weight:700; font-size:1.25rem; }
-.hero-kpi-label { display:block; opacity:.6; font-size:.8rem; margin-top:2px; }
 
 .badge-aw {
-  display:inline-flex; align-items:center; gap:.4rem;
-  height: 28px; padding: 0 10px; border-radius: 999px;
-  background: rgba(255,255,255,.06);
-  border: 1px solid rgba(255,255,255,.08);
-  font-size: .78rem; color: var(--fg);
+  display:inline-flex; align-items:center;
+  height:28px; padding:0 12px; border-radius:9999px;
+  border:1.5px solid #000; background: rgba(0,0,0,.06);
+  font-size:.78rem;
 }
 
 .segmented {
   display:flex; gap:8px; flex-wrap:wrap;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
-  padding:6px; border-radius: 999px;
+  border:1.5px solid #000; border-radius:9999px; padding:6px;
+  background: rgba(0,0,0,.06);
 }
-.segmented-btn {
-  border-radius: 999px; padding: 8px 14px; font-size: .9rem;
-  color: var(--fg); background: transparent;
-  transition: all .2s ease;
-}
-.segmented-btn:hover { background: rgba(255,255,255,.06); }
-.segmented-btn.is-active { background: var(--brand); color: #000; }
+.segmented-btn { border-radius:9999px; padding:8px 14px; font-size:.9rem; }
+.segmented-btn.is-active { background:#000; color: var(--yellow); }
+.segmented-btn:not(.is-active):hover { background: rgba(0,0,0,.08); }
 
-.range-aw { width: 100%; accent-color: #f59e0b; }
+.range-aw { width: 100%; accent-color: #000; }
+.row { display:flex; align-items:center; justify-content:space-between; padding:6px 0; }
+.pos { color:#0a7a20; }
+.neg { color:#b00020; }
 
-.row { display:flex; align-items:center; justify-content:space-between; padding: 6px 0; }
-.pos { color: #22c55e; }
-.neg { color: #ef4444; }
-
+/* Hero image wrapper */
+.hero-wrap { position: relative; }
+.hero-img  { width: 100%; height: auto; display:block; }
