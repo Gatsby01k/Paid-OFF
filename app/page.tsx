@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "recharts";
 
-/* ==== простая симуляция под график ==== */
+/* ===== симуляция для графика ===== */
 type RiskMode = "low" | "medium" | "high";
 type Term = 1 | 7 | 30 | 90;
 
@@ -48,7 +48,7 @@ export default function Page() {
     [term, deposit, risk]
   );
 
-  // Плавное появление секций на скролле
+  // reveal-анимации
   const rootRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
@@ -71,26 +71,21 @@ export default function Page() {
           PAIDOFF
         </div>
         <nav className="hidden md:flex items-center gap-8">
-          <a className="hover:opacity-70" href="#about">About</a>
-          <a className="hover:opacity-70" href="#features">Algorithms</a>
-          <a className="hover:opacity-70" href="#contact">Contact</a>
-          <Link
-            href="#getstarted"
-            className="bg-black text-yellow-300 px-5 py-2 rounded-full shadow-[0_14px_36px_rgba(0,0,0,.35)] hover:scale-[1.03] transition"
-          >
-            Get Started
-          </Link>
+          <a className="nav-link" href="#about">About</a>
+          <a className="nav-link" href="#features">Algorithms</a>
+          <a className="nav-link" href="#contact">Contact</a>
+          <Link href="#getstarted" className="btn btn-cta">Get Started</Link>
         </nav>
       </header>
 
-      {/* HERO — фикс сетки и размеров */}
+      {/* HERO — фикс отступов и размеров, робот не налезает на хедер */}
       <section
         className="
           container-aw
           grid grid-cols-1 md:grid-cols-12
           gap-10 md:gap-12
           items-center
-          pt-6 md:pt-4
+          mt-12 md:mt-16
           pb-12 md:pb-20
           min-h-[70vh]
         "
@@ -100,39 +95,30 @@ export default function Page() {
           <div className="uppercase text-xs md:text-sm font-extrabold tracking-[0.2em] mb-2">
             Automated trading with artificial intelligence
           </div>
-          <h1
-            className="
-              leading-[0.92]
-              font-extrabold
-              uppercase
-              text-[clamp(44px,9vw,120px)]
-              tracking-[-.02em]
-              [text-shadow:0.05em_0.05em_0_#f2c100,0.12em_0.12em_0_rgba(0,0,0,.18)]
-            "
-          >
-            AI CRYPT<br/>TRADING
+          <h1 className="headline head-xl">
+            AI CRYPT
+            <br />
+            TRADING
           </h1>
           <p className="mt-5 text-[15px] md:text-[18px] max-w-[640px] text-black/80">
-            Умный риск-менеджмент, прозрачная симуляция доходности и чистый интерфейс уровня <b>awwwards</b>.
+            Умный риск-менеджмент, прозрачная симуляция доходности и чистый
+            интерфейс уровня <b>awwwards</b>.
           </p>
           <div className="mt-7 flex gap-4">
             <Link
               href="#sim"
-              className="px-6 py-3 bg-black text-yellow-300 rounded-full font-semibold shadow-xl hover:scale-[1.03] transition"
+              className="btn btn-cta"
             >
               Get Started
             </Link>
-            <a
-              href="#features"
-              className="px-6 py-3 border-2 border-black rounded-full font-semibold hover:bg-black hover:text-yellow-300 transition"
-            >
+            <a href="#features" className="btn btn-outline">
               Learn more
             </a>
           </div>
         </div>
 
-        {/* Правая колонка — робот (всё целиком, центрировано) */}
-        <div className="md:col-span-6 flex justify-center md:justify-end reveal">
+        {/* Правая колонка — робот строго в своей зоне */}
+        <div className="md:col-span-6 flex justify-center reveal">
           <div className="robot-wrap">
             <svg
               className="robot-svg"
@@ -203,12 +189,12 @@ export default function Page() {
 
       {/* Чёрная лента преимуществ */}
       <section className="mt-4 bg-[#0b0b0e] text-[#ffd300] border-t-2 border-b-2 border-black">
-        <div className="container-aw py-4 flex items-center justify-between gap-6 flex-wrap text-sm md:text-base">
-          <span className="opacity-90 tracking-wider uppercase">Security</span>
-          <span className="opacity-90 tracking-wider uppercase">Algorithms</span>
-          <span className="opacity-90 tracking-wider uppercase">Analytics</span>
-          <span className="opacity-90 tracking-wider uppercase">Backtesting</span>
-          <span className="opacity-90 tracking-wider uppercase">Risk Control</span>
+        <div className="container-aw py-4 band">
+          <span className="band-item">Security</span>
+          <span className="band-item">Algorithms</span>
+          <span className="band-item">Analytics</span>
+          <span className="band-item">Backtesting</span>
+          <span className="band-item">Risk Control</span>
         </div>
       </section>
 
@@ -223,7 +209,11 @@ export default function Page() {
                 <button
                   key={r}
                   onClick={() => setRisk(r)}
-                  className={`px-4 py-2 rounded-full font-semibold ${risk === r ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
+                  className={`px-4 py-2 rounded-full font-semibold ${
+                    risk === r
+                      ? "bg-black text-yellow-300"
+                      : "border border-black hover:bg-black hover:text-yellow-300"
+                  }`}
                 >
                   {r === "low" ? "Low" : r === "medium" ? "Medium" : "High"}
                 </button>
@@ -238,7 +228,11 @@ export default function Page() {
                 <button
                   key={t}
                   onClick={() => setTerm(t as Term)}
-                  className={`px-4 py-2 rounded-full font-semibold ${term === t ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"}`}
+                  className={`px-4 py-2 rounded-full font-semibold ${
+                    term === t
+                      ? "bg-black text-yellow-300"
+                      : "border border-black hover:bg-black hover:text-yellow-300"
+                  }`}
                 >
                   {t}D
                 </button>
@@ -260,8 +254,8 @@ export default function Page() {
             <div className="mt-3 text-sm text-white/90">
               <div className="flex justify-between"><span>Deposit</span><span>{deposit} USDT</span></div>
               <div className="flex justify-between"><span>End capital</span><span>{end} USDT</span></div>
-              <div className="flex justify-between"><span>PNL</span><span className={pnl >= 0 ? "text-emerald-400" : "text-red-400"}>{pnl >= 0 ? "+" : ""}{pnl} USDT</span></div>
-              <div className="flex justify-between"><span>ROI</span><span className={roi >= 0 ? "text-emerald-400" : "text-red-400"}>{roi >= 0 ? "+" : ""}{roi}%</span></div>
+              <div className="flex justify-between"><span>PNL</span><span className={pnl>=0?"text-emerald-400":"text-red-400"}>{pnl>=0?"+":""}{pnl} USDT</span></div>
+              <div className="flex justify-between"><span>ROI</span><span className={roi>=0?"text-emerald-400":"text-red-400"}>{roi>=0?"+":""}{roi}%</span></div>
             </div>
           </div>
         </div>
@@ -280,15 +274,10 @@ export default function Page() {
                 <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,211,0,.22)" />
                   <XAxis dataKey="name" stroke="rgba(255,211,0,.75)" />
-                  <YAxis stroke="rgba(255,211,0,.75)" width={60} tickFormatter={(v) => `$${v}`} />
+                  <YAxis stroke="rgba(255,211,0,.75)" width={60} tickFormatter={(v)=>`$${v}`} />
                   <Tooltip
-                    contentStyle={{
-                      background: "#000",
-                      border: "1px solid rgba(255,211,0,.35)",
-                      borderRadius: 12,
-                      color: "#ffd300",
-                    }}
-                    formatter={(value: number) => [`$${value}`, "Balance"]}
+                    contentStyle={{ background:"#000", border:"1px solid rgba(255,211,0,.35)", borderRadius:12, color:"#ffd300" }}
+                    formatter={(value:number)=>[`$${value}`,"Balance"]}
                   />
                   <Line type="monotone" dataKey="balance" dot={false} stroke="#ffd300" strokeWidth={2.2} />
                 </LineChart>
