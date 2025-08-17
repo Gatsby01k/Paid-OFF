@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "recharts";
 
-/* ===== симуляция для графика ===== */
+/* Симуляция */
 type RiskMode = "low" | "medium" | "high";
 type Term = 1 | 7 | 30 | 90;
 
@@ -48,15 +48,12 @@ export default function Page() {
     [term, deposit, risk]
   );
 
-  // reveal-анимации
+  // reveal
   const rootRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) (e.target as HTMLElement).classList.add("show");
-        }),
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) (e.target as HTMLElement).classList.add("show"); }),
       { threshold: 0.18 }
     );
     els.forEach((el) => io.observe(el));
@@ -78,47 +75,39 @@ export default function Page() {
         </nav>
       </header>
 
-      {/* HERO — фикс отступов и размеров, робот не налезает на хедер */}
+      {/* HERO */}
       <section
         className="
           container-aw
           grid grid-cols-1 md:grid-cols-12
           gap-10 md:gap-12
           items-center
-          mt-12 md:mt-16
-          pb-12 md:pb-20
-          min-h-[70vh]
+          mt-10 md:mt-14
+          pb-12 md:pb-16
+          min-h-[72vh]
         "
       >
-        {/* Левая колонка */}
+        {/* Левый столбец */}
         <div className="md:col-span-6 reveal">
           <div className="uppercase text-xs md:text-sm font-extrabold tracking-[0.2em] mb-2">
             Automated trading with artificial intelligence
           </div>
-          <h1 className="headline head-xl">
+          <h1 className="headline head-xl head-max">
             AI CRYPT
             <br />
             TRADING
           </h1>
           <p className="mt-5 text-[15px] md:text-[18px] max-w-[640px] text-black/80">
-            Умный риск-менеджмент, прозрачная симуляция доходности и чистый
-            интерфейс уровня <b>awwwards</b>.
+            Умный риск-менеджмент, прозрачная симуляция доходности и чистый интерфейс уровня <b>awwwards</b>.
           </p>
           <div className="mt-7 flex gap-4">
-            <Link
-              href="#sim"
-              className="btn btn-cta"
-            >
-              Get Started
-            </Link>
-            <a href="#features" className="btn btn-outline">
-              Learn more
-            </a>
+            <Link href="#sim" className="btn btn-cta">Get Started</Link>
+            <a href="#features" className="btn btn-outline">Learn more</a>
           </div>
         </div>
 
-        {/* Правая колонка — робот строго в своей зоне */}
-        <div className="md:col-span-6 flex justify-center reveal">
+        {/* Правый столбец — робот строго по центру, фикс ширины */}
+        <div className="md:col-span-6 flex justify-center md:justify-end reveal">
           <div className="robot-wrap">
             <svg
               className="robot-svg"
@@ -187,7 +176,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Чёрная лента преимуществ */}
+      {/* Лента */}
       <section className="mt-4 bg-[#0b0b0e] text-[#ffd300] border-t-2 border-b-2 border-black">
         <div className="container-aw py-4 band">
           <span className="band-item">Security</span>
@@ -205,17 +194,14 @@ export default function Page() {
           <div className="card reveal">
             <h3 className="card-title mb-3">Risk mode</h3>
             <div className="flex flex-wrap gap-2">
-              {(["low", "medium", "high"] as RiskMode[]).map((r) => (
-                <button
-                  key={r}
+              {(["low","medium","high"] as RiskMode[]).map((r) => (
+                <button key={r}
                   onClick={() => setRisk(r)}
                   className={`px-4 py-2 rounded-full font-semibold ${
-                    risk === r
-                      ? "bg-black text-yellow-300"
-                      : "border border-black hover:bg-black hover:text-yellow-300"
+                    risk===r ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"
                   }`}
                 >
-                  {r === "low" ? "Low" : r === "medium" ? "Medium" : "High"}
+                  {r[0].toUpperCase()+r.slice(1)}
                 </button>
               ))}
             </div>
@@ -224,14 +210,11 @@ export default function Page() {
           <div className="card reveal">
             <h3 className="card-title mb-3">Term</h3>
             <div className="flex flex-wrap gap-2">
-              {[1, 7, 30, 90].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTerm(t as Term)}
+              {[1,7,30,90].map((t)=>(
+                <button key={t}
+                  onClick={()=>setTerm(t as Term)}
                   className={`px-4 py-2 rounded-full font-semibold ${
-                    term === t
-                      ? "bg-black text-yellow-300"
-                      : "border border-black hover:bg-black hover:text-yellow-300"
+                    term===t ? "bg-black text-yellow-300" : "border border-black hover:bg-black hover:text-yellow-300"
                   }`}
                 >
                   {t}D
@@ -242,13 +225,8 @@ export default function Page() {
 
           <div className="card reveal">
             <h3 className="card-title mb-2">Deposit (USDT)</h3>
-            <input
-              type="range"
-              min={100}
-              max={10000}
-              step={50}
-              value={deposit}
-              onChange={(e) => setDeposit(parseInt(e.target.value, 10))}
+            <input type="range" min={100} max={10000} step={50}
+              value={deposit} onChange={(e)=>setDeposit(parseInt(e.target.value,10))}
               className="w-full accent-black"
             />
             <div className="mt-3 text-sm text-white/90">
@@ -265,9 +243,7 @@ export default function Page() {
           <div className="card reveal">
             <div className="flex items-center justify-between mb-2">
               <h3 className="card-title">Performance simulation</h3>
-              <span className="text-xs md:text-sm text-white/80">
-                {term}d • {risk.toUpperCase()}
-              </span>
+              <span className="text-xs md:text-sm text-white/80">{term}d • {risk.toUpperCase()}</span>
             </div>
             <div className="h-[360px]">
               <ResponsiveContainer width="100%" height="100%">
