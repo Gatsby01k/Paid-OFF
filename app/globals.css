@@ -126,3 +126,35 @@ body{
   from { transform: translateX(-20px); opacity: .1; }
   to   { transform: translateX(60px); opacity: .8; }
 }
+/* Робот — чтобы не обрезался и выглядел ровно */
+.robot-wrap{ width:min(520px,40vw); max-width:100%; overflow:visible; }
+.robot-svg{ display:block; width:100%; height:auto; overflow:visible; }
+
+@keyframes floatY { 0%{transform:translateY(0)} 50%{transform:translateY(-10px)} 100%{transform:translateY(0)} }
+@keyframes coinSpin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+@keyframes eyePulse { 0%,100%{ r:7 } 50%{ r:9 } }
+@keyframes blink { 0%,92%,100%{ ry:7 } 95%{ ry:1.5 } }
+@keyframes shine { 0%{ opacity:.0; transform:translateX(-40px)} 100%{opacity:.25; transform:translateX(140px)} }
+
+.robot{ filter: drop-shadow(0 14px 28px rgba(0,0,0,.25)); }
+.robot__body{ animation: floatY 5s ease-in-out infinite; transform-origin:50% 50%; }
+.robot__coin{ transform-origin:50% 50%; animation: coinSpin 6s linear infinite; }
+.robot__eye{ animation: eyePulse 3s ease-in-out infinite; }
+.robot__blink{ animation: blink 4.8s ease-in-out infinite; transform-origin:center; }
+.robot__shine{ animation: shine 2.6s ease-in-out infinite; opacity:.25; }
+
+/* Стеклянные карточки */
+.card{
+  background: rgba(11,11,14,.9);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius: 18px;
+  color: #f6f6f6;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+  backdrop-filter: blur(8px);
+  padding: 18px;
+}
+.card-title{ font-weight:700; }
+
+/* Появление секций */
+.reveal{ opacity:0; transform: translateY(24px); transition: transform .7s ease, opacity .7s ease; }
+.reveal.show{ opacity:1; transform: translateY(0); }
