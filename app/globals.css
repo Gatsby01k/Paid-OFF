@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Тема ───────────────────────────────────────────── */
+/* Тема */
 :root{
   --yellow:#ffd300;
   --yellow2:#ffe879;
@@ -10,7 +10,7 @@
   --dark:#0b0b0e;
 }
 
-/* ─── База ───────────────────────────────────────────── */
+/* База */
 html,body{height:100%}
 body{
   background: linear-gradient(180deg,var(--yellow2) 0%, var(--yellow) 48%, #f5c600 100%);
@@ -19,18 +19,18 @@ body{
 }
 .container-aw{@apply mx-auto max-w-7xl px-6 md:px-10}
 
-/* ─── Навбар ─────────────────────────────────────────── */
+/* Навбар */
 header .nav-link{font-weight:700;letter-spacing:.02em;opacity:.85;transition:opacity .2s}
 header .nav-link:hover{opacity:1}
 
-/* ─── Кнопки ─────────────────────────────────────────── */
+/* Кнопки */
 .btn{@apply inline-flex items-center justify-center rounded-full px-6 py-2.5 text-sm font-semibold transition}
 .btn-cta{background:#000;color:var(--yellow);box-shadow:0 14px 36px rgba(0,0,0,.35)}
 .btn-cta:hover{filter:brightness(.93);transform:translateY(-1px)}
 .btn-outline{border:2px solid #000;color:#000;background:transparent}
 .btn-outline:hover{background:#000;color:var(--yellow)}
 
-/* ─── Карточки (стекло) ─────────────────────────────── */
+/* Карточки */
 .card{
   background: rgba(11,11,14,.9);
   border:1px solid rgba(255,255,255,.1);
@@ -42,17 +42,18 @@ header .nav-link:hover{opacity:1}
 }
 .card-title{font-weight:700}
 
-/* ─── Появление на скролле ──────────────────────────── */
+/* Reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:transform .7s ease,opacity .7s ease}
 .reveal.show{opacity:1;transform:translateY(0)}
 
-/* ─── Заголовок hero ────────────────────────────────── */
-.headline{font-weight:900;line-height:.9;letter-spacing:-.02em;
+/* Заголовок hero */
+.headline{font-weight:900;line-height:.92;letter-spacing:-.02em;
   text-shadow:0.05em 0.05em 0 #f2c100,0.12em 0.12em 0 rgba(0,0,0,.18)}
-.head-xl{font-size:clamp(44px,9vw,120px)}
+.head-xl{font-size:clamp(40px,8.2vw,108px)} /* чуть меньше, чтобы не ломало сетку */
+.head-max{max-width:680px}                 /* ограничение ширины для ровной колонки */
 
-/* ─── Робот SVG (фикс обрезания и размер) ───────────── */
-.robot-wrap{max-width:420px;width:100%;overflow:visible;margin-top:10px}
+/* Робот */
+.robot-wrap{max-width:400px;width:100%;overflow:visible}
 .robot-svg{display:block;width:100%;height:auto;overflow:visible}
 
 @keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
@@ -68,6 +69,6 @@ header .nav-link:hover{opacity:1}
 .robot__blink{animation:blink 4.8s ease-in-out infinite;transform-origin:center}
 .robot__shine{animation:shine 2.6s ease-in-out infinite;opacity:.25}
 
-/* ─── Нижняя чёрная лента ───────────────────────────── */
+/* Лента */
 .band{@apply flex items-center justify-between gap-6 flex-wrap text-sm md:text-base}
 .band-item{opacity:.9;letter-spacing:.06em;text-transform:uppercase}
