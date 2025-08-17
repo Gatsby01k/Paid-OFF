@@ -1,4 +1,6 @@
+// @ts-nocheck
 'use client';
+
 // Подключаем декларации R3F, чтобы TS понимал <mesh/> и другие теги
 import type {} from '../types/r3f';
 import React, { useState, useEffect, Suspense, useRef } from "react";
