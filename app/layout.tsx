@@ -10,20 +10,14 @@ const mont = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'PaidOFF — Automated Trading (AI)',
-  description: 'Automated crypto trading with clean UI and ROI simulation.',
+  title: 'PaidOFF — AI Crypto Trading',
+  description: 'Automated trading with clean UI and ROI simulation.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru">
-      <body className={mont.className}>
-        {children}
-      </body>
+      <body className={mont.className}>{children}</body>
     </html>
   );
 }
