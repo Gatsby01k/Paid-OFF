@@ -27,3 +27,4 @@ npm run dev
 - three, @react-three/fiber, @react-three/drei
 "# Paid-OFF" 
 "# PIdors" 
+"# PIdors" 
