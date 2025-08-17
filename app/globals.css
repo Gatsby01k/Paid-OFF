@@ -9,8 +9,6 @@
   --ink:#0a0a0a;
   --dark:#0b0b0e;
 }
-
-/* База */
 html,body{height:100%}
 body{
   background: linear-gradient(180deg,var(--yellow2) 0%, var(--yellow) 48%, #f5c600 100%);
@@ -20,6 +18,7 @@ body{
 .container-aw{@apply mx-auto max-w-7xl px-6 md:px-10}
 
 /* Навбар */
+header{ position:relative; z-index:10; }
 header .nav-link{font-weight:700;letter-spacing:.02em;opacity:.85;transition:opacity .2s}
 header .nav-link:hover{opacity:1}
 
@@ -47,27 +46,24 @@ header .nav-link:hover{opacity:1}
 .reveal.show{opacity:1;transform:translateY(0)}
 
 /* Заголовок hero */
+.kicker{ letter-spacing:.24em; font-weight:900; }
 .headline{font-weight:900;line-height:.92;letter-spacing:-.02em;
   text-shadow:0.05em 0.05em 0 #f2c100,0.12em 0.12em 0 rgba(0,0,0,.18)}
-.head-xl{font-size:clamp(40px,8.2vw,108px)} /* чуть меньше, чтобы не ломало сетку */
-.head-max{max-width:680px}                 /* ограничение ширины для ровной колонки */
+.head-xl{font-size:clamp(40px,8vw,104px)}
+.head-max{max-width:680px}
 
-/* Робот */
-.robot-wrap{max-width:400px;width:100%;overflow:visible}
+/* Робот WALL-E-стайл */
+.robot-wrap{max-width:420px;width:100%;overflow:visible}
 .robot-svg{display:block;width:100%;height:auto;overflow:visible}
 
 @keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
 @keyframes coinSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes eyePulse{0%,100%{r:7}50%{r:9}}
-@keyframes blink{0%,92%,100%{ry:7}95%{ry:1.5}}
-@keyframes shine{0%{opacity:0;transform:translateX(-40px)}100%{opacity:.25;transform:translateX(140px)}}
+@keyframes blink{0%,97%,100%{transform:scaleY(1)}98%{transform:scaleY(0.15)}}
 
 .robot{filter:drop-shadow(0 14px 28px rgba(0,0,0,.25))}
-.robot__body{animation:floatY 5s ease-in-out infinite;transform-origin:50% 50%}
-.robot__coin{transform-origin:50% 50%;animation:coinSpin 6s linear infinite}
-.robot__eye{animation:eyePulse 3s ease-in-out infinite}
-.robot__blink{animation:blink 4.8s ease-in-out infinite;transform-origin:center}
-.robot__shine{animation:shine 2.6s ease-in-out infinite;opacity:.25}
+.robot__body{animation:floatY 5.2s ease-in-out infinite; transform-origin:50% 50%}
+.robot__coin{transform-origin:50% 50%; animation:coinSpin 6s linear infinite}
+.robot__eyelid-left,.robot__eyelid-right{transform-origin:center; animation:blink 4.8s ease-in-out infinite}
 
 /* Лента */
 .band{@apply flex items-center justify-between gap-6 flex-wrap text-sm md:text-base}
