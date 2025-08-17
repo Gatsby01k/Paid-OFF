@@ -1,4 +1,4 @@
-// Позволяет использовать JSX-теги R3F: <mesh/>, <boxGeometry/>, ...
+// types/r3f.d.ts
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -15,5 +15,4 @@ declare global {
     }
   }
 }
-// Нужно, чтобы файл считался модулем
 export {};
